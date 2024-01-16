@@ -68,7 +68,7 @@ def main():
             'C': 'Avengers',
             'D': 'Incredibles'
         },
-        'Nope, but I can clean your colon quicker than one of them burrito\'s with extra guacamole sauce!': {
+        'Heathcote. You know, you remind me of the pilsbury doughboy. If I poke your stomach, will it make you go oh-hoh-hoh-hoh!': {
             'A': 'Bulletproof',
             'B': 'Major Payne',
             'C': 'White Chicks',
