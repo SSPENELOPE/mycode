@@ -7,7 +7,7 @@ def main():
     
     for farm in farms:
         print(f"{farm['name']}\n")
-    choice = input("Choose a farm");
+    choice = input("Choose a farm: ")
     
     for farm in farms: 
         if farm['name'].lower() == choice.lower():
