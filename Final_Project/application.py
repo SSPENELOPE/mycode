@@ -2,6 +2,7 @@
 
 import os
 import time
+import flask from Flask
 
 def clear_console():
     # Clear console based on the platform
