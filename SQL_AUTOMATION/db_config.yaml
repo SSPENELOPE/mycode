@@ -1,0 +1,8 @@
+# db-config.ini
+
+mysql:
+  host: '192.168.1.72'
+  port: 3306
+  user: 'root'
+  password: '123456789'  # Ensure this is a string
+  database: 'starcontractor_db'

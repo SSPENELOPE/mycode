@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, redirect
-
+import os
 app = Flask(__name__)
 
 
 def clear_console():
-    # Clear console based on the platform
-    # This is a simple console clearing function, which may not work in all environments
-    pass
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def save_score(username, score):
