@@ -44,7 +44,7 @@ def seed_users(users):
         if conn.is_connected():
             cursor = conn.cursor()
 
-            # SQL query to insert user data
+            # SQL query to insert user data, we can update this as needed
             insert_query = """
             INSERT INTO user (email, starting_area, username, password, admin, verified)
             VALUES (%s, %s, %s, %s, %s, %s)
@@ -66,6 +66,6 @@ def seed_users(users):
             conn.close()
 
 if __name__ == "__main__":
-    num_users_to_insert = 10  # Adjust the number of users as needed
+    num_users_to_insert = 1000  # Adjust the number of users as needed
     users = generate_users(num_users_to_insert)
     seed_users(users)

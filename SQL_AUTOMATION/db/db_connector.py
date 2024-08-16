@@ -1,35 +1,37 @@
-import mysql.connector
+import pandas as pd
+from sqlalchemy import create_engine
 import yaml
 
-def fetch_data():
-    # Read the configuration from config.yaml
-    # with open('db_config.yaml', 'r') as config_file:
-    #     config = yaml.safe_load(config_file)
-    
-    # mysql_config = config['mysql']
+def process_boolean_values(df):
+    for column in df.columns:
+        if df[column].dtype == 'object':
+            df[column] = df[column].apply(lambda x: "False" if x == b'\x00' else "True" if x == b'\x01' else x)
+    return df
 
-    # # Establish the connection to MySQL
-    # conn = mysql.connector.connect(**mysql_config)
-    
+def fetch_data():
+    # Read the configuration from db_config.yaml
     with open('db_config.yaml', 'r') as config_file:
         config = yaml.safe_load(config_file)
 
     # Extract MySQL configuration
     mysql_config = config['mysql']
     
-    conn = mysql.connector.connect(**mysql_config)
+    # Construct the database URL
+    db_url = f"mysql+pymysql://{mysql_config['user']}:{mysql_config['password']}@{mysql_config['host']}:{mysql_config['port']}/{mysql_config['database']}"
 
-    # Create a cursor object to interact with the database
-    cursor = conn.cursor()
+    # Create an SQLAlchemy engine
+    engine = create_engine(db_url)
 
-    # Execute a query to fetch data
-    cursor.execute("SELECT username, starting_area, verified FROM user")
+    # Prompt the user to choose a table
+    table_name = input("Enter the table name you want to query: ")
 
-    # Fetch all rows from the executed query
-    rows = cursor.fetchall()
+    # Execute a query to fetch all rows from the selected table
+    query = f"SELECT * FROM {table_name}"
+    df = pd.read_sql(query, engine)
 
-    # Close the cursor and connection
-    cursor.close()
-    conn.close()
+    # Dispose of the engine
+    engine.dispose()
+    
+    process_boolean_values(df)
 
-    return rows
+    return df

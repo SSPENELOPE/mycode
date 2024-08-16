@@ -1,7 +1,8 @@
 # db-config.ini
-
+# Since we are on wsl-2,we are essentially on our own mini vm, we need to run the host through our local IP address. 
+# We can use the 'ifconfig' command to get our local IP address for linux, or ipconfig for windows.
 mysql:
-  host: '192.168.1.72'
+  host: '192.168.1.72' # If you not using wsl, this should be localhost
   port: 3306
   user: 'root'
   password: '123456789'  # Ensure this is a string
